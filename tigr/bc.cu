@@ -237,8 +237,16 @@ int main(int argc, char** argv)
 	gpuErrorcheck(cudaMemcpy(dist, d_dist, num_nodes*sizeof(unsigned int), cudaMemcpyDeviceToHost));
 	gpuErrorcheck(cudaMemcpy(bc, d_bc, num_nodes*sizeof(float), cudaMemcpyDeviceToHost));
 
-	utilities::PrintResults(bc, 30);
-	
+	int print_nodes = 0;
+	if(num_nodes>30)
+	{
+		print_nodes=30;
+	}
+	else
+	{
+		print_nodes=num_nodes
+	}
+	utilities::PrintResults(bc, print_nodes);	
 	
 	if(arguments.hasOutput)
 		utilities::SaveResults(arguments.output, bc, num_nodes);
