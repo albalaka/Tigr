@@ -244,7 +244,7 @@ int main(int argc, char** argv)
 	}
 	else
 	{
-		print_nodes=num_nodes
+		print_nodes=num_nodes;
 	}
 	utilities::PrintResults(bc, print_nodes);	
 	

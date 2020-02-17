@@ -180,7 +180,14 @@ int main(int argc, char** argv)
 	
 	gpuErrorcheck(cudaMemcpy(dist, d_dist, num_nodes*sizeof(unsigned int), cudaMemcpyDeviceToHost));
 
-	utilities::PrintResults(dist, 30);
+	if(num_nodes < 30)
+	{
+	    utilities::PrintResults(dist, num_nodes);
+	}
+	else
+	{
+	    utilities::PrintResults(dist, 30);
+	}
 	
 	if(arguments.hasOutput)
 		utilities::SaveResults(arguments.output, dist, num_nodes);
