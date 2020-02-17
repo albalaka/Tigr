@@ -183,8 +183,13 @@ int main(int argc, char** argv)
 	cout << "Processing finished in " << runtime << " (ms).\n";
 	
 	gpuErrorcheck(cudaMemcpy(dist, d_dist, num_nodes*sizeof(unsigned int), cudaMemcpyDeviceToHost));
-
-	utilities::PrintResults(dist, 30);
+        
+	if(num_nodes < 30){
+	    utilities::PrintResults(dist, 30);
+	}
+	else{
+	    utilities::PrintResults(dist, 30);
+	}
 			
 	if(arguments.hasOutput)
 		utilities::SaveResults(arguments.output, dist, num_nodes);
