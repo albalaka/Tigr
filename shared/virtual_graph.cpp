@@ -133,6 +133,10 @@ void VirtualGraph::MakeUGraph()
 	}
 
 	outDegreeCounter  = new uint[graph->num_nodes];
+	for (int i=0; i<graph->num_edges; i++)
+	{
+		outDegreeCounter[i] = 0;
+	}
 	
 	for(int i=0; i<graph->num_edges; i++)
 	{
