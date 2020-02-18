@@ -91,7 +91,7 @@ int main(int argc, char** argv)
 {
 	ArgumentParser arguments(argc, argv, true, false);	
 	
-	Graph graph(arguments.input, true);
+	Graph graph(arguments.input, true, arguments.printIntermediateResults);
 	graph.ReadGraph();
 	
 	VirtualGraph vGraph(graph);

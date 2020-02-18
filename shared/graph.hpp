@@ -32,6 +32,7 @@ public:
 	string graphFilePath;
 	bool isWeighted;
 	bool hasZeroID;
+    bool printIntermediateResults;
 	uint num_nodes;
 	uint num_edges;
     vector<Edge> edges;

@@ -95,53 +95,55 @@ void VirtualGraph::MakeGraph()
 		}
 	}
 
-	std::cout << "NodePointer: " << endl;
-	for (int i = 0; i < graph->num_nodes; i++)
-	{
-		std::cout << nodePointer[i] << " ";
-	}
-	std::cout << endl;
+	if(graph->printIntermediateResults){
+		std::cout << "NodePointer: " << endl;
+		for (int i = 0; i < graph->num_nodes; i++)
+		{
+			std::cout << nodePointer[i] << " ";
+		}
+		std::cout << endl;
 
-	std::cout << "edgeList: " << endl;
-	for (int i = 0; i < 2 * graph->num_edges + graph->num_nodes; i++)
-	{
-		std::cout << edgeList[i] << " ";
-	}
-	std::cout << endl;
+		std::cout << "edgeList: " << endl;
+		for (int i = 0; i < 2 * graph->num_edges + graph->num_nodes; i++)
+		{
+			std::cout << edgeList[i] << " ";
+		}
+		std::cout << endl;
 
-	std::cout << "outDegree: " << endl;
-	for (int i = 0; i < graph->num_nodes; i++)
-	{
-		std::cout << outDegree[i] << " ";
-	}
-	std::cout << endl;
+		std::cout << "outDegree: " << endl;
+		for (int i = 0; i < graph->num_nodes; i++)
+		{
+			std::cout << outDegree[i] << " ";
+		}
+		std::cout << endl;
 
-	std::cout << "inDegree: " << endl;
-	for (int i = 0; i < graph->num_nodes; i++)
-	{
-		std::cout << inDegree[i] << " ";
-	}
-	std::cout << endl;
+		std::cout << "inDegree: " << endl;
+		for (int i = 0; i < graph->num_nodes; i++)
+		{
+			std::cout << inDegree[i] << " ";
+		}
+		std::cout << endl;
 
-	std::cout << "outDegreeCounter: " << endl;
-	for (int i = 0; i < graph->num_nodes; i++)
-	{
-		std::cout << outDegreeCounter[i] << " ";
-	}
-	std::cout << endl;
+		std::cout << "outDegreeCounter: " << endl;
+		for (int i = 0; i < graph->num_nodes; i++)
+		{
+			std::cout << outDegreeCounter[i] << " ";
+		}
+		std::cout << endl;
 
-	std::cout << "partNodePointer: " << endl;
-	for (int i = 0; i < numParts; i++)
-	{
-		std::cout << partNodePointer[i].node << " ";
-	}
-	std::cout << endl;
+		std::cout << "partNodePointer: " << endl;
+		for (int i = 0; i < numParts; i++)
+		{
+			std::cout << partNodePointer[i].node << " ";
+		}
+		std::cout << endl;
 
-	for (int i = 0; i < numParts; i++)
-	{
-		std::cout << partNodePointer[i].part << " ";
+		for (int i = 0; i < numParts; i++)
+		{
+			std::cout << partNodePointer[i].part << " ";
+		}
+		std::cout << endl;
 	}
-	std::cout << endl;
 }
 
 void VirtualGraph::MakeUGraph()
@@ -210,51 +212,54 @@ void VirtualGraph::MakeUGraph()
 		}
 	}
 
-	std::cout << "NodePointer: " << endl;
-	for (int i = 0; i < graph->num_nodes; i++)
-	{
-		std::cout << nodePointer[i] << " ";
-	}
-	std::cout << endl;
+	if(graph->printIntermediateResults){
 
-	std::cout << "edgeList: " << endl;
-	for (int i = 0; i < graph->num_edges + graph->num_nodes; i++)
-	{
-		std::cout << edgeList[i] << " ";
-	}
-	std::cout << endl;
+		std::cout << "NodePointer: " << endl;
+		for (int i = 0; i < graph->num_nodes; i++)
+		{
+			std::cout << nodePointer[i] << " ";
+		}
+		std::cout << endl;
 
-	std::cout << "outDegree: " << endl;
-	for (int i = 0; i < graph->num_nodes; i++)
-	{
-		std::cout << outDegree[i] << " ";
-	}
-	std::cout << endl;
+		std::cout << "edgeList: " << endl;
+		for (int i = 0; i < graph->num_edges + graph->num_nodes; i++)
+		{
+			std::cout << edgeList[i] << " ";
+		}
+		std::cout << endl;
 
-	std::cout << "inDegree: " << endl;
-	for (int i = 0; i < graph->num_nodes; i++)
-	{
-		std::cout << inDegree[i] << " ";
-	}
-	std::cout << endl;
+		std::cout << "outDegree: " << endl;
+		for (int i = 0; i < graph->num_nodes; i++)
+		{
+			std::cout << outDegree[i] << " ";
+		}
+		std::cout << endl;
 
-	std::cout << "outDegreeCounter: " << endl;
-	for (int i = 0; i < graph->num_nodes; i++)
-	{
-		std::cout << outDegreeCounter[i] << " ";
-	}
-	std::cout << endl;
+		std::cout << "inDegree: " << endl;
+		for (int i = 0; i < graph->num_nodes; i++)
+		{
+			std::cout << inDegree[i] << " ";
+		}
+		std::cout << endl;
 
-	std::cout << "partNodePointer: " << endl;
-	for (int i = 0; i < numParts; i++)
-	{
-		std::cout << partNodePointer[i].node << " ";
-	}
-	std::cout << endl;
+		std::cout << "outDegreeCounter: " << endl;
+		for (int i = 0; i < graph->num_nodes; i++)
+		{
+			std::cout << outDegreeCounter[i] << " ";
+		}
+		std::cout << endl;
 
-	for (int i = 0; i < numParts; i++)
-	{
-		std::cout << partNodePointer[i].part << " ";
+		std::cout << "partNodePointer: " << endl;
+		for (int i = 0; i < numParts; i++)
+		{
+			std::cout << partNodePointer[i].node << " ";
+		}
+		std::cout << endl;
+
+		for (int i = 0; i < numParts; i++)
+		{
+			std::cout << partNodePointer[i].part << " ";
+		}
+		std::cout << endl;
 	}
-	std::cout << endl;
 }

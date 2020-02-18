@@ -18,6 +18,7 @@ ArgumentParser::ArgumentParser(int argc, char **argv, bool canHaveSource, bool c
 	hasOutput = false;
 	hasDeviceID = false;
 	hasNumberOfItrs = false;
+	printIntermediateResults = false;
 	
 	Parse();
 }
@@ -72,6 +73,9 @@ bool ArgumentParser::Parse()
 			else if (strcmp(argv[i], "--iteration") == 0 && canHaveItrs) {
 				numberOfItrs = atoi(argv[i+1]);
 				hasNumberOfItrs = true;
+			}
+			else if (strcmp(argv[i], "--print_intermediate_results") == 0) {
+				printIntermediateResults = true;
 			}
 			else
 			{

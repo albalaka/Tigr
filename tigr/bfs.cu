@@ -22,17 +22,17 @@ __global__ void kernel(unsigned int numParts,
 
 	if(partId < numParts)
 	{
-		unsigned int id = partNodePointer[partId].node;
-		unsigned int part = partNodePointer[partId].part;
+		unsigned int id = partNodePointer[partId].node; // original graph node index
+		unsigned int part = partNodePointer[partId].part; // node's partition number
 
 		if(dist[id] != level)
 			return;
 
-		unsigned int thisPointer = nodePointer[id];
-		unsigned int degree = edgeList[thisPointer];
+		unsigned int thisPointer = nodePointer[id]; // index in edge list for node ID 
+		unsigned int degree = edgeList[thisPointer]; // degree of the node
 			
 		unsigned int numParts;
-		if(degree % Part_Size == 0)
+		if(degree % Part_Size == 0) // Recalculating the number of partitions required for this node
 			numParts = degree / Part_Size ;
 		else
 			numParts = degree / Part_Size + 1;
@@ -42,9 +42,9 @@ __global__ void kernel(unsigned int numParts,
 
 		unsigned int ofs = thisPointer + part + 1;
 
-		for(int i=0; i<Part_Size; i++)
+		for(int i=0; i<Part_Size; i++) // Calculating each partition in parallel???
 		{
-			if(part + i*numParts >= degree)
+			if(part + i*numParts >= degree) // Check to see if we have gone beyond the possible distance
 				break;
 			end = ofs + i*numParts;
 			
@@ -71,7 +71,7 @@ int main(int argc, char** argv)
 {	
 	ArgumentParser arguments(argc, argv, true, false);
 	
-	Graph graph(arguments.input, false);
+	Graph graph(arguments.input, false, arguments.printIntermediateResults);
 	graph.ReadGraph();
 	
 	VirtualGraph vGraph(graph);

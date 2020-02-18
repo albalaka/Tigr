@@ -3,10 +3,11 @@
 
 
 
-Graph::Graph(string graphFilePath, bool isWeighted)
+Graph::Graph(string graphFilePath, bool isWeighted, bool printIntermediateResults)
 {
 	this->graphFilePath = graphFilePath;
 	this->isWeighted = isWeighted;
+	this->printIntermediateResults = printIntermediateResults;
 	graphLoaded = false;
 	hasZeroID = false;
 }
