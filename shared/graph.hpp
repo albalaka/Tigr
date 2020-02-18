@@ -38,7 +38,7 @@ public:
     vector<Edge> edges;
     vector<uint> weights;
     bool graphLoaded;
-    Graph(string graphFilePath, bool isWeighted);
+    Graph(string graphFilePath, bool isWeighted, bool printIntermediateResults);
     void ReadGraph();
 };
 
