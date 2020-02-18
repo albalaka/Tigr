@@ -51,7 +51,7 @@ bool ArgumentParser::Parse()
 		// }
 		
 			
-		for(int i=1; i<argc-1; i=i+2)
+		for(int i=1; i<argc-1; i++)
 		{
 			
 			if (strcmp(argv[i], "--input") == 0) {
