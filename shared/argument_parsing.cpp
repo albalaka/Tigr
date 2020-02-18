@@ -43,12 +43,12 @@ bool ArgumentParser::Parse()
 				exit(0);
 			}
 		
-		if(argc%2 == 0)
-		{
-			cout << "\nThere was an error parsing command line arguments\n";
-			cout << GenerateHelpString();
-			exit(0);
-		}
+		// if(argc%2 == 0)
+		// {
+		// 	cout << "\nThere was an error parsing command line arguments\n";
+		// 	cout << GenerateHelpString();
+		// 	exit(0);
+		// }
 		
 			
 		for(int i=1; i<argc-1; i=i+2)
