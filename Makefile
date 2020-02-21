@@ -8,7 +8,7 @@ NFLAGS=-arch=sm_32
 SHARED=shared
 TIGR=tigr
 
-all: make1 make2 sssp bfs cc pr sswp bc
+all: make1 make2 sssp bfs cc pr sswp bc make_udt
 
 make1:
 	make -C $(SHARED)
@@ -34,7 +34,11 @@ sswp: $(TIGR)/sswp.o $(SHARED)/graph.o $(SHARED)/virtual_graph.o $(SHARED)/argum
 bc: $(TIGR)/bc.o $(SHARED)/graph.o $(SHARED)/virtual_graph.o $(SHARED)/argument_parsing.o $(SHARED)/argument_parsing.o $(SHARED)/timer.o $(SHARED)/tigr_utilities.o
 	$(NC) $(TIGR)/bc.o $(SHARED)/graph.o $(SHARED)/virtual_graph.o $(SHARED)/argument_parsing.o $(SHARED)/timer.o $(SHARED)/tigr_utilities.o -o bc $(CFLAGS) $(NFLAGS)
 
+make_udt: $(TIGR)/make_udt.o $(SHARED)/graph.o $(SHARED)/virtual_graph.o $(SHARED)/udt_graph.o $(SHARED)/argument_parsing.o $(SHARED)/argument_parsing.o $(SHARED)/timer.o $(SHARED)/tigr_utilities.o
+	$(NC) $(TIGR)/make_udt.o $(SHARED)/graph.o $(SHARED)/virtual_graph.o $(SHARED)/argument_parsing.o $(SHARED)/timer.o $(SHARED)/tigr_utilities.o -o make_udt $(CFLAGS) $(NFLAGS)
+
+
 clean:
 	make -C $(SHARED) clean
 	make -C $(TIGR) clean
-	rm -f sssp bfs cc pr sswp bc
+	rm -f sssp bfs cc pr sswp bc make_udt
