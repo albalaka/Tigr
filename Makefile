@@ -34,9 +34,8 @@ sswp: $(TIGR)/sswp.o $(SHARED)/graph.o $(SHARED)/virtual_graph.o $(SHARED)/argum
 bc: $(TIGR)/bc.o $(SHARED)/graph.o $(SHARED)/virtual_graph.o $(SHARED)/argument_parsing.o $(SHARED)/argument_parsing.o $(SHARED)/timer.o $(SHARED)/tigr_utilities.o
 	$(NC) $(TIGR)/bc.o $(SHARED)/graph.o $(SHARED)/virtual_graph.o $(SHARED)/argument_parsing.o $(SHARED)/timer.o $(SHARED)/tigr_utilities.o -o bc $(CFLAGS) $(NFLAGS)
 
-make_udt: $(TIGR)/make_udt.o $(SHARED)/graph.o $(SHARED)/virtual_graph.o $(SHARED)/udt_graph.o $(SHARED)/argument_parsing.o $(SHARED)/argument_parsing.o $(SHARED)/timer.o $(SHARED)/tigr_utilities.o
-	$(NC) $(TIGR)/make_udt.o $(SHARED)/graph.o $(SHARED)/virtual_graph.o $(SHARED)/argument_parsing.o $(SHARED)/timer.o $(SHARED)/tigr_utilities.o -o make_udt $(CFLAGS) $(NFLAGS)
-
+make_udt: $(TIGR)/make_udt.o $(SHARED)/graph.o $(SHARED)/virtual_graph.o $(SHARED)/udt_graph.o $(SHARED)/argument_parsing.o $(SHARED)/timer.o $(SHARED)/tigr_utilities.o
+	$(CC) -o make_udt $(TIGR)/make_udt.o $(SHARED)/graph.o $(SHARED)/virtual_graph.o $(SHARED)/udt_graph.o $(SHARED)/argument_parsing.o $(SHARED)/timer.o $(SHARED)/tigr_utilities.o $(CFLAGS)
 
 clean:
 	make -C $(SHARED) clean

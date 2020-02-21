@@ -1,6 +1,7 @@
 #ifndef UDT_GRAPH_HPP
 #define UDT_GRAPH_HPP
 
+#include "graph.hpp"
 #include "globals.hpp"
 
 class UDTGraph
@@ -17,7 +18,6 @@ public:
 
     UDTGraph(Graph &graph);
 
-    void MakeGraph();
     void MakeUDTGraph();
 };
 
