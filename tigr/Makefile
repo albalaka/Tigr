@@ -27,7 +27,7 @@ bc.o: bc.cu
 	$(NC) -c bc.cu $(SHARED)/graph.o $(SHARED)/virtual_graph.o $(SHARED)/argument_parsing.o $(SHARED)/timer.o $(SHARED)/tigr_utilities.o $(CFLAGS) $(NFLAGS)
 
 make_udt.o: make_udt.cpp
-	$(CC) -c make_udt.cpp $(SHARED)/graph.o $(SHARED)/virtual_graph.o $(SHARED)/udt_graph.o $(SHARED)/argument_parsing.o $(SHARED)/timer.o $(SHARED)/tigr_utilities.o $(CFLAGS)
+	$(NC) -c make_udt.cpp $(SHARED)/graph.o $(SHARED)/udt_graph.o $(SHARED)/argument_parsing.o $(SHARED)/timer.o $(SHARED)/tigr_utilities.o $(CFLAGS) $(NFLAGS)
 	
 clean:
 	rm  *.o 

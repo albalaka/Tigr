@@ -13,9 +13,6 @@ graph.o: graph.cpp
 
 virtual_graph.o: virtual_graph.cpp
 	$(CC) -c virtual_graph.cpp -o virtual_graph.o $(CFLAGS)
-
-udt_graph.o: udt_graph.cpp
-	$(CC) -c udt_graph.cpp -o udt_graph.o $(CFLAGS)
 	
 argument_parsing.o: argument_parsing.cpp
 	$(CC) -c argument_parsing.cpp -o argument_parsing.o $(CFLAGS)
