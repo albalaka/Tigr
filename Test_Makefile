@@ -1,0 +1,23 @@
+CC=g++
+NC=nvcc
+CFLAGS=-std=c++11 -O3
+NFLAGS=-arch=sm_32
+
+SHARED=shared
+TIGR=tigr
+
+all: make1 make2 make_udt
+
+make1:
+	make -C $(SHARED)
+
+make2:
+	make -C $(TIGR) -f Test_Makefile
+
+make_udt: $(TIGR)/make_udt.o $(SHARED)/graph.o $(SHARED)/virtual_graph.o $(SHARED)/udt_graph.o $(SHARED)/argument_parsing.o $(SHARED)/timer.o $(SHARED)/tigr_utilities.o 
+	$(CC) -o make_udt $(TIGR)/make_udt.o $(SHARED)/graph.o $(SHARED)/virtual_graph.o $(SHARED)/udt_graph.o $(SHARED)/argument_parsing.o $(SHARED)/timer.o $(SHARED)/tigr_utilities.o $(CFLAGS)
+clean:
+	make -C $(SHARED) clean
+	make -C $(TIGR) clean
+	rm -f make_udt
+

@@ -20,7 +20,7 @@
 #include <chrono>
 #include <stdexcept>
 #include <iostream>
-#include <sstream> 
+#include <sstream>
 
 using namespace std;
 
@@ -30,17 +30,28 @@ const unsigned int Part_Size = 8;
 
 const unsigned int DIST_INFINITY = std::numeric_limits<unsigned int>::max() - 1;
 
-struct Edge{
+struct Edge
+{
     unsigned int source;
     unsigned int end;
 };
 
-
-
-struct PartPointer{
-	unsigned int node;
-	unsigned int part;
+struct Destination
+{
+    long long node_id;
+    long long part_id;
 };
 
+struct OutwardEdge
+{
+    unsigned int weight;
+    struct Destination destination;
+};
 
-#endif 	//	GLOBALS_HPP
+struct PartPointer
+{
+    unsigned int node;
+    unsigned int part;
+};
+
+#endif //	GLOBALS_HPP

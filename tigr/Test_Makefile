@@ -1,0 +1,15 @@
+CC=g++
+NC=nvcc
+CFLAGS=-std=c++11 -O3
+NFLAGS=-arch=sm_32
+
+SHARED=../shared
+
+all: make_udt.o
+
+make_udt.o: make_udt.cpp
+	$(CC) -c make_udt.cpp $(SHARED)/graph.o $(SHARED)/udt_graph.o $(SHARED)/argument_parsing.o $(SHARED)/timer.o $(SHARED)/tigr_utilities.o $(CFLAGS)
+        
+clean:
+	rm  *.o 
+

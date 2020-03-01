@@ -8,10 +8,11 @@ int main(int argc, char **argv)
 {
 	ArgumentParser arguments(argc, argv, true, false);
 
-	Graph graph(arguments.input, false, arguments.printIntermediateResults);
+	Graph graph(arguments.input, true, arguments.printIntermediateResults);
 	graph.ReadGraph();
 
 	UDTGraph udtGraph(graph);
+	udtGraph.MakeGraph();
 	udtGraph.MakeUDTGraph();
 	return 0;
 }
