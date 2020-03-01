@@ -8,11 +8,18 @@ int main(int argc, char **argv)
 {
 	ArgumentParser arguments(argc, argv, true, false);
 
-	Graph graph(arguments.input, true, arguments.printIntermediateResults);
+	Graph graph(arguments.input, arguments.isWeighted, arguments.printIntermediateResults);
 	graph.ReadGraph();
 
 	UDTGraph udtGraph(graph);
-	udtGraph.MakeGraph();
+	if (arguments.isWeighted)
+	{
+		udtGraph.MakeGraph();
+	}
+	else
+	{
+		udtGraph.MakeUGraph();
+	}
 	udtGraph.MakeUDTGraph();
 	return 0;
 }

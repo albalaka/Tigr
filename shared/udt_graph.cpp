@@ -36,7 +36,7 @@ UDTGraph::UDTGraph(Graph &graph)
 void UDTGraph::MakeGraph()
 {
     nodePointer = new uint[graph->num_nodes];
-    edgeList = new uint[graph->num_edges + graph->num_nodes];
+    edgeList = new uint[2 * graph->num_edges + graph->num_nodes];
 
     uint *outDegreeCounter;
     uint source;
@@ -59,8 +59,123 @@ void UDTGraph::MakeGraph()
             numParts += outDegree[i] / Part_Size;
         else
             numParts += outDegree[i] / Part_Size + 1;
-        // std::cout << "i = " << i << endl;
-        // std::cout << "numParts = " << numParts << endl;
+
+        counter = counter + outDegree[i] * 2 + 1;
+    }
+
+    outDegreeCounter = new uint[graph->num_nodes];
+    for (int i = 0; i < graph->num_edges; i++)
+    {
+        outDegreeCounter[i] = 0;
+    }
+
+    for (int i = 0; i < graph->num_edges; i++)
+    {
+        source = graph->edges[i].source;
+        end = graph->edges[i].end;
+        w8 = graph->weights[i];
+
+        uint location = nodePointer[source] + 1 + 2 * outDegreeCounter[source];
+
+        edgeList[location] = end;
+        edgeList[location + 1] = w8;
+
+        outDegreeCounter[source]++;
+    }
+
+    partNodePointer = new PartPointer[numParts];
+    int thisNumParts;
+    long long countParts = 0;
+    for (int i = 0; i < graph->num_nodes; i++)
+    {
+        if (outDegree[i] % Part_Size == 0)
+            thisNumParts = outDegree[i] / Part_Size;
+        else
+            thisNumParts = outDegree[i] / Part_Size + 1;
+        for (int j = 0; j < thisNumParts; j++)
+        {
+            partNodePointer[countParts].node = i;
+            partNodePointer[countParts++].part = j;
+        }
+    }
+
+    if (graph->printIntermediateResults)
+    {
+        std::cout << "NodePointer: " << endl;
+        for (int i = 0; i < graph->num_nodes; i++)
+        {
+            std::cout << nodePointer[i] << " ";
+        }
+        std::cout << endl;
+
+        std::cout << "edgeList: " << endl;
+        for (int i = 0; i < 2 * graph->num_edges + graph->num_nodes; i++)
+        {
+            std::cout << edgeList[i] << " ";
+        }
+        std::cout << endl;
+
+        std::cout << "outDegree: " << endl;
+        for (int i = 0; i < graph->num_nodes; i++)
+        {
+            std::cout << outDegree[i] << " ";
+        }
+        std::cout << endl;
+
+        std::cout << "inDegree: " << endl;
+        for (int i = 0; i < graph->num_nodes; i++)
+        {
+            std::cout << inDegree[i] << " ";
+        }
+        std::cout << endl;
+
+        std::cout << "outDegreeCounter: " << endl;
+        for (int i = 0; i < graph->num_nodes; i++)
+        {
+            std::cout << outDegreeCounter[i] << " ";
+        }
+        std::cout << endl;
+
+        std::cout << "partNodePointer: " << endl;
+        for (int i = 0; i < numParts; i++)
+        {
+            std::cout << partNodePointer[i].node << " ";
+        }
+        std::cout << endl;
+
+        for (int i = 0; i < numParts; i++)
+        {
+            std::cout << partNodePointer[i].part << " ";
+        }
+        std::cout << endl;
+    }
+}
+
+void UDTGraph::MakeUGraph()
+{
+    nodePointer = new uint[graph->num_nodes];
+    edgeList = new uint[graph->num_edges + graph->num_nodes];
+
+    uint *outDegreeCounter;
+    uint source;
+    uint end;
+
+    long long counter = 0;
+    numParts = 0;
+    int numZero = 0;
+
+    for (int i = 0; i < graph->num_nodes; i++)
+    {
+        nodePointer[i] = counter;
+        edgeList[counter] = outDegree[i];
+
+        if (outDegree[i] == 0)
+            numZero++;
+
+        if (outDegree[i] % Part_Size == 0)
+            numParts += outDegree[i] / Part_Size;
+        else
+            numParts += outDegree[i] / Part_Size + 1;
 
         counter = counter + outDegree[i] + 1;
     }
@@ -184,13 +299,26 @@ void UDTGraph::MakeUDTGraph()
         }
 
         queue<OutwardEdge> q;
-        for (int j = np + 1; j < degree + np + 1; j++)
+        if (graph->isWeighted)
         {
-            uint node_id = edgeList[j];
-            // TODO: Weights
-            Destination dest = {node_id, 0};
-            OutwardEdge outward_edge = {1, dest};
-            q.push(outward_edge);
+            for (int j = np + 1; j < 2 * degree + np + 1; j += 2)
+            {
+                uint node_id = edgeList[j];
+                uint weight = edgeList[j + 1];
+                Destination dest = {node_id, 0};
+                OutwardEdge outward_edge = {weight, dest};
+                q.push(outward_edge);
+            }
+        }
+        else
+        {
+            for (int j = np + 1; j < degree + np + 1; j++)
+            {
+                uint node_id = edgeList[j];
+                Destination dest = {node_id, 0};
+                OutwardEdge outward_edge = {1, dest};
+                q.push(outward_edge);
+            }
         }
 
         int part_id = 1;
@@ -230,12 +358,9 @@ void UDTGraph::MakeUDTGraph()
     node *np = linked_list.head;
     while (np != NULL)
     {
-        // cout << "Source: " << np->node_id << "." << np->part_id << endl;
-        // cout << "degree = " << np->degree << endl;
         for (int i = 0; i < np->degree; i++)
         {
             OutwardEdge oe = np->outward_edges[i];
-            // cout << np->outward_edges[i].destination.node_id << "." << np->outward_edges[i].destination.part_id << " : " << np->outward_edges[i].weight << endl;
             udt_file << np->node_id << "." << np->part_id << " " << np->outward_edges[i].destination.node_id << "." << np->outward_edges[i].destination.part_id << " " << np->outward_edges[i].weight << endl;
         }
         np = np->nextNode;

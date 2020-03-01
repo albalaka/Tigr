@@ -35,6 +35,7 @@ public:
     UDTGraph(Graph &graph);
 
     void MakeGraph();
+    void MakeUGraph();
     void MakeUDTGraph();
 };
 
