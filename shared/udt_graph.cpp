@@ -167,22 +167,7 @@ void UDTGraph::MakeUDTGraph()
         int np = nodePointer[i];
         int degree = edgeList[np];
 
-        std::cout << "NodePointer: " << endl;
-        for (int i = 0; i < graph->num_nodes; i++)
-        {
-            std::cout << nodePointer[i] << " ";
-        }
-        std::cout << endl;
-
-        std::cout << "edgeList: " << endl;
-        for (int i = 0; i < graph->num_edges + graph->num_nodes; i++)
-        {
-            std::cout << edgeList[i] << " ";
-        }
-        std::cout << endl;
-
         struct node *newNode = new node();
-        // cout << "newNode mem location: " << newNode << endl;
 
         newNode->node_id = i;
         newNode->part_id = 0;
@@ -191,8 +176,6 @@ void UDTGraph::MakeUDTGraph()
         {
             linked_list.head = newNode;
             linked_list.current_pointer = newNode;
-            // cout << "Setting head" << endl;
-            // cout << "node info " << linked_list.head->node_id << "." << linked_list.head->part_id << endl;
         }
         else
         {
@@ -200,15 +183,8 @@ void UDTGraph::MakeUDTGraph()
             linked_list.current_pointer = newNode;
         }
 
-        cout << "edgeList: " << endl;
-        for (int i = 0; i < graph->num_edges + graph->num_nodes; i++)
-        {
-            cout << edgeList[i] << " ";
-        }
-        cout << endl;
-
         queue<OutwardEdge> q;
-        for (int j = np + 1; j < degree + 1; j++)
+        for (int j = np + 1; j < degree + np + 1; j++)
         {
             uint node_id = edgeList[j];
             // TODO: Weights
@@ -231,14 +207,13 @@ void UDTGraph::MakeUDTGraph()
             {
                 part_id++;
             }
-            for (int k = 1; k < Part_Size; k++)
+            for (int k = 0; k < Part_Size; k++)
             {
                 newVirtualNode->outward_edges[k] = q.front();
                 q.pop();
             }
             newVirtualNode->degree = Part_Size;
             struct Destination dest = {newVirtualNode->node_id, newVirtualNode->part_id};
-            cout << "nvn->node_id: " << newVirtualNode->node_id << "nvn->part_id = " << newVirtualNode->part_id << endl;
             OutwardEdge oe = {0, dest};
             q.push(oe);
         }
@@ -255,39 +230,16 @@ void UDTGraph::MakeUDTGraph()
     node *np = linked_list.head;
     while (np != NULL)
     {
-        cout << "Source: " << np->node_id << "." << np->part_id << endl;
-        cout << "degree = " << np->degree << endl;
+        // cout << "Source: " << np->node_id << "." << np->part_id << endl;
+        // cout << "degree = " << np->degree << endl;
         for (int i = 0; i < np->degree; i++)
         {
             OutwardEdge oe = np->outward_edges[i];
-            cout << np->outward_edges[i].destination.node_id << "." << np->outward_edges[i].destination.part_id << " : " << np->outward_edges[i].weight << endl;
+            // cout << np->outward_edges[i].destination.node_id << "." << np->outward_edges[i].destination.part_id << " : " << np->outward_edges[i].weight << endl;
+            udt_file << np->node_id << "." << np->part_id << " " << np->outward_edges[i].destination.node_id << "." << np->outward_edges[i].destination.part_id << " " << np->outward_edges[i].weight << endl;
         }
-        cout << endl;
         np = np->nextNode;
     }
-
-    // Writes graph to file called "udt_graph.txt"
-    for (int i = 0; i < graph->num_edges; i++)
-    {
-        e = graph->edges[i];
-        source = e.source;
-        end = e.end;
-        weight = graph->weights[i];
-        // cout << "source = " << source << endl;
-        // cout << "end = " << end << endl;
-        // cout << "weight = " << weight << endl;
-
-        udt_file << source << " " << end << " " << weight << endl;
-
-        // if (outDegree[i] == 0)
-        // 	numZero++;
-
-        // if (outDegree[i] % Part_Size == 0)
-        // 	numParts += outDegree[i] / Part_Size;
-        // else
-        // 	numParts += outDegree[i] / Part_Size + 1;
-
-        // counter = counter + outDegree[i] * 2 + 1;
-    }
+    cout << "Done writing to udt_graph.txt" << endl;
     udt_file.close();
 }
