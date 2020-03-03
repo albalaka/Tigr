@@ -269,8 +269,6 @@ void UDTGraph::MakeUGraph()
 
 void UDTGraph::MakeUDTGraph()
 {
-    ofstream udt_file;
-    udt_file.open("udt_graph.txt");
     Edge e;
     unsigned int source;
     unsigned int end;
@@ -354,7 +352,11 @@ void UDTGraph::MakeUDTGraph()
             q_index++;
         }
     }
-
+}
+void UDTGraph::PrintUDTGraph()
+{
+    ofstream udt_file;
+    udt_file.open("udt_graph.txt");
     node *np = linked_list.head;
     while (np != NULL)
     {

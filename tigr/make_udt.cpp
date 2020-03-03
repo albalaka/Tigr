@@ -21,5 +21,6 @@ int main(int argc, char **argv)
 		udtGraph.MakeUGraph();
 	}
 	udtGraph.MakeUDTGraph();
+	udtGraph.PrintUDTGraph();
 	return 0;
 }

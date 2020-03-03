@@ -37,6 +37,7 @@ public:
     void MakeGraph();
     void MakeUGraph();
     void MakeUDTGraph();
+    void PrintUDTGraph();
 };
 
 #endif //	UDT_GRAPH_HPP
