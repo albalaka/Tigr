@@ -7,7 +7,7 @@
 struct node
 {
     long long node_id;
-    long long part_id;
+    // long long part_id;
     int degree;
     OutwardEdge outward_edges[Part_Size];
     node *nextNode = NULL;

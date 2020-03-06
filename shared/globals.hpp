@@ -39,7 +39,7 @@ struct Edge
 struct Destination
 {
     long long node_id;
-    long long part_id;
+    // long long part_id;
 };
 
 struct OutwardEdge

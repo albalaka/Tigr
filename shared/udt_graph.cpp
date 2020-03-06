@@ -273,6 +273,7 @@ void UDTGraph::MakeUDTGraph()
     unsigned int source;
     unsigned int end;
     unsigned int weight;
+    unsigned int current_node_value = graph->num_nodes + 1;
 
     // Transform graph
     for (int i = 0; i < graph->num_nodes; i++)
@@ -283,7 +284,7 @@ void UDTGraph::MakeUDTGraph()
         struct node *newNode = new node();
 
         newNode->node_id = i;
-        newNode->part_id = 0;
+        // newNode->part_id = 0;
         newNode->degree = degree;
         if (linked_list.head == NULL)
         {
@@ -303,7 +304,8 @@ void UDTGraph::MakeUDTGraph()
             {
                 uint node_id = edgeList[j];
                 uint weight = edgeList[j + 1];
-                Destination dest = {node_id, 0};
+                // Destination dest = {node_id, 0};
+                Destination dest = {node_id};
                 OutwardEdge outward_edge = {weight, dest};
                 q.push(outward_edge);
             }
@@ -313,33 +315,36 @@ void UDTGraph::MakeUDTGraph()
             for (int j = np + 1; j < degree + np + 1; j++)
             {
                 uint node_id = edgeList[j];
-                Destination dest = {node_id, 0};
+                Destination dest = {node_id};
+                // Destination dest = {node_id, 0};
                 OutwardEdge outward_edge = {1, dest};
                 q.push(outward_edge);
             }
         }
 
-        int part_id = 1;
+        // int part_id = 1;
         while (q.size() > Part_Size)
         {
             struct node *newVirtualNode = new node();
             linked_list.current_pointer->nextNode = newVirtualNode;
             linked_list.current_pointer = newVirtualNode;
 
-            newVirtualNode->node_id = newNode->node_id;
-            newVirtualNode->part_id = part_id;
-            part_id++;
-            if (part_id % 10 == 0)
-            {
-                part_id++;
-            }
+            newVirtualNode->node_id = current_node_value;
+            current_node_value++;
+            // newVirtualNode->part_id = part_id;
+            // part_id++;
+            // if (part_id % 10 == 0)
+            // {
+            //     part_id++;
+            // }
             for (int k = 0; k < Part_Size; k++)
             {
                 newVirtualNode->outward_edges[k] = q.front();
                 q.pop();
             }
             newVirtualNode->degree = Part_Size;
-            struct Destination dest = {newVirtualNode->node_id, newVirtualNode->part_id};
+            // struct Destination dest = {newVirtualNode->node_id, newVirtualNode->part_id};
+            struct Destination dest = {newVirtualNode->node_id};
             OutwardEdge oe = {0, dest};
             q.push(oe);
         }
@@ -363,7 +368,8 @@ void UDTGraph::PrintUDTGraph()
         for (int i = 0; i < np->degree; i++)
         {
             OutwardEdge oe = np->outward_edges[i];
-            udt_file << np->node_id << "." << np->part_id << " " << np->outward_edges[i].destination.node_id << "." << np->outward_edges[i].destination.part_id << " " << np->outward_edges[i].weight << endl;
+            // udt_file << np->node_id << "." << np->part_id << " " << np->outward_edges[i].destination.node_id << "." << np->outward_edges[i].destination.part_id << " " << np->outward_edges[i].weight << endl;
+            udt_file << np->node_id << " " << np->outward_edges[i].destination.node_id << " " << np->outward_edges[i].weight << endl;
         }
         np = np->nextNode;
     }
