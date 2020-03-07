@@ -26,7 +26,7 @@ using namespace std;
 
 typedef unsigned int uint;
 
-const unsigned int Part_Size = 2000;
+const unsigned int Part_Size = 8;
 
 const unsigned int DIST_INFINITY = std::numeric_limits<unsigned int>::max() - 1;
 
