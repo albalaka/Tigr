@@ -273,7 +273,7 @@ void UDTGraph::MakeUDTGraph()
     unsigned int source;
     unsigned int end;
     unsigned int weight;
-    unsigned int current_node_value = graph->num_nodes + 1;
+    unsigned int current_node_value = graph->num_nodes;
 
     // Transform graph
     for (int i = 0; i < graph->num_nodes; i++)
