@@ -1,7 +1,7 @@
 CC=g++
 NC=nvcc
-CFLAGS=-std=c++11 -O3
-NFLAGS=-arch=sm_32
+CFLAGS=-std=c++11 -O3 -g 
+NFLAGS=-arch=sm_61
 
 SHARED=shared
 TIGR=tigr

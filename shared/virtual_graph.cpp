@@ -60,7 +60,7 @@ void VirtualGraph::MakeGraph()
 	}
 
 	outDegreeCounter = new uint[graph->num_nodes];
-	for (int i = 0; i < graph->num_edges; i++)
+	for (int i = 0; i < graph->num_nodes; i++)
 	{
 		outDegreeCounter[i] = 0;
 	}
@@ -95,7 +95,8 @@ void VirtualGraph::MakeGraph()
 		}
 	}
 
-	if(graph->printIntermediateResults){
+	if (graph->printIntermediateResults)
+	{
 		std::cout << "NodePointer: " << endl;
 		for (int i = 0; i < graph->num_nodes; i++)
 		{
@@ -179,7 +180,7 @@ void VirtualGraph::MakeUGraph()
 	}
 
 	outDegreeCounter = new uint[graph->num_nodes];
-	for (int i = 0; i < graph->num_edges; i++)
+	for (int i = 0; i < graph->num_nodes; i++)
 	{
 		outDegreeCounter[i] = 0;
 	}
@@ -212,7 +213,8 @@ void VirtualGraph::MakeUGraph()
 		}
 	}
 
-	if(graph->printIntermediateResults){
+	if (graph->printIntermediateResults)
+	{
 
 		std::cout << "NodePointer: " << endl;
 		for (int i = 0; i < graph->num_nodes; i++)

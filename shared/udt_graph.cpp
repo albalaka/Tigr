@@ -64,7 +64,7 @@ void UDTGraph::MakeGraph()
     }
 
     outDegreeCounter = new uint[graph->num_nodes];
-    for (int i = 0; i < graph->num_edges; i++)
+    for (int i = 0; i < graph->num_nodes; i++)
     {
         outDegreeCounter[i] = 0;
     }
