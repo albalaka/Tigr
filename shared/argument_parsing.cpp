@@ -7,7 +7,7 @@ ArgumentParser::ArgumentParser(int argc, char **argv, bool canHaveSource, bool c
 	this->canHaveSource = canHaveSource;
 	this->canHaveItrs = canHaveItrs;
 
-	this->sourceNode = 0;
+	this->sourceNode = 3;
 	this->deviceID = 0;
 	this->numberOfItrs = 1;
 
